@@ -1,35 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { fabric } from "fabric";
+import { initAligningGuidelines } from "./canvas-alignment";
+import CanvasContext from "./canvas-context";
 
 export default function Canvas() {
+  const { objects } = useContext(CanvasContext);
+  console.log(objects);
+  
   React.useEffect(() => {
     const canvas = new fabric.Canvas("craftar-canvas");
 
     canvas.setHeight(900);
     canvas.setWidth(700);
 
-    const rect = new fabric.Rect({
-      width: 50,
-      height: 50,
-      fill: "blue",
-      angle: 10,
-      top: 20,
-      left: 20
+    objects.forEach((object: fabric.Object) => {
+      canvas.add(object)
     });
-    const textbox = new fabric.Textbox("Click on the Rectangle to move it.", {
-      fontSize: 20,
-      left: 50,
-      top: 100,
-      width: 200
-    });
-    canvas.add(textbox);
-    canvas.add(rect);
-
+    
     // UseEffect's cleanup function
     return () => {
       canvas.dispose();
     };
-  }, []);
+  }, [objects]);
 
   return (
 
