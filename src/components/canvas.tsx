@@ -3,8 +3,9 @@ import { fabric } from "fabric";
 import { initAligningGuidelines } from "./canvas-alignment";
 import CanvasContext from "./canvas-context";
 
-export default function Canvas() {
+export default function Canvas(props: any) {
   const { objects } = useContext(CanvasContext);
+  const { onActiveObject } = props;
   console.log(objects);
   
   React.useEffect(() => {
@@ -18,6 +19,7 @@ export default function Canvas() {
       canvas.add(object);
       if (Object.is(objects.length - 1, key)) {
         canvas.setActiveObject(object);
+        onActiveObject((object as any).id,(object as any).type );
       }
         
     });
@@ -25,7 +27,7 @@ export default function Canvas() {
 
     canvas.on('mouse:up', (e) => {
       if (e.target) {
-        console.log(e.target)
+        onActiveObject((e.target as any).id, ((e.target as any).type));
       }
     })
     
