@@ -9,6 +9,7 @@ export default function Canvas() {
   
   React.useEffect(() => {
     const canvas = new fabric.Canvas("craftar-canvas");
+    initAligningGuidelines(canvas);
 
     canvas.setHeight(900);
     canvas.setWidth(700);
