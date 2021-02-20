@@ -8,23 +8,19 @@ export interface CraftarRectOptions extends fabric.IRectOptions {
 
 }
 export default function Box() {
-  const id = 'box';
+  const type = 'box';
   const { addObject, objects } = useContext(CanvasContext);
   const box = new fabric.Rect({
       width: 50,
       height: 50,
-      stroke: 'blue',
+      stroke: '#03a1fc',
       fill: 'white',
       strokeWidth: 3,
       top: 20,
       left: 20,
-      id: objects.filter((o: any)=> o.craftarType === id).length++,
-      craftarType: id,
+      id: objects.filter((o: any)=> o.craftarType === type).length++,
+      craftarType: type,
     } as unknown as CraftarRectOptions);
-
-    box.on('mousedown', function() { 
-      console.log('Im a box')
-  });
 
   return (
 

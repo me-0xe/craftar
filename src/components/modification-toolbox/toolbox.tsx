@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { fabric } from "fabric";
+import Box from "./tools/content/box";
+import NameTag from "./tools/setup/name-tag";
 
 export enum ModificationSet {
-  Box = "rect",
+  Box = "box",
   NameTag = "name-tag",
   Text = "text",
 };
@@ -13,7 +13,9 @@ export default function ModificationToolbox(props: any) {
   const renderModifications = () => {
     switch(selectedObject?.type) {
       case ModificationSet.Box:
-        return 'box component';
+        return <Box selectedObject={selectedObject}/>
+      case ModificationSet.NameTag:
+        return <NameTag />
       default:
         return 'some nice placeholder :)';
     }

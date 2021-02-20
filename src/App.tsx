@@ -15,6 +15,9 @@ export default function App() {
   const addObject = (newObject: any) => {
     setCanvasObjects([...canvasObjects, newObject]);
   };
+  const updateObject = (newObjectIndex: number, key:any, value: number) => {
+    setCanvasObjects(Object.assign([], canvasObjects, {[newObjectIndex]: {...canvasObjects[newObjectIndex], [key]: value }}));
+  };
 
   const onActiveObject = (id: any, type: any) => {
     setSelectedObject({id, type});
@@ -22,7 +25,7 @@ export default function App() {
 
   return (
     <div className="App">
-    <CanvasContext.Provider value={{ objects: canvasObjects, addObject }}>
+    <CanvasContext.Provider value={{ objects: canvasObjects, addObject, updateObject }}>
         <AssetToolbox />
         <Canvas onActiveObject={onActiveObject} />
         <ModificationToolbox selectedObject={selectedObject} />

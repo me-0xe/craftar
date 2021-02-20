@@ -6,7 +6,6 @@ import CanvasContext from "./canvas-context";
 export default function Canvas(props: any) {
   const { objects } = useContext(CanvasContext);
   const { onActiveObject } = props;
-  console.log(objects);
   
   React.useEffect(() => {
     const canvas = new fabric.Canvas("craftar-canvas");
@@ -19,7 +18,7 @@ export default function Canvas(props: any) {
       canvas.add(object);
       if (Object.is(objects.length - 1, key)) {
         canvas.setActiveObject(object);
-        onActiveObject((object as any).id,(object as any).type );
+        onActiveObject((object as any).id,(object as any).craftarType );
       }
         
     });
@@ -27,7 +26,7 @@ export default function Canvas(props: any) {
 
     canvas.on('mouse:up', (e) => {
       if (e.target) {
-        onActiveObject((e.target as any).id, ((e.target as any).type));
+        onActiveObject((e.target as any).id, ((e.target as any).craftarType));
       }
     })
     
